@@ -317,7 +317,7 @@ const getPrices = async function upsellGetPrices(allPrices) {
 
   return selectedProduct;
 };
-const prices = [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Pack of Detox Tea (28 Bags)","id":1749,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"1x Pack of Detox Tea (28 Bags)","discountAmount":0,"discountPercentage":0},{"name":"2x Pack of Detox Tea (56 Bags)","id":1746,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"2x Pack of Detox Tea (56 Bags)","discountAmount":0,"discountPercentage":0},{"name":"3x Pack of Detox Tea (84 Bags)","id":1747,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"3x Pack of Detox Tea (84 Bags)","discountAmount":0,"discountPercentage":0},{"name":"Akemi Detox Tea  Journey Package Protection","id":1703,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Akemi Detox Tea  Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Akemi Detox Tea - 3 Year Warranty","id":1702,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Akemi Detox Tea - 3 Year Warranty","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Akemi Detox Tea","id":1704,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Akemi Detox Tea","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Akemi Detox Tea","id":1719,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Akemi Detox Tea","discountAmount":0,"discountPercentage":0}];
+const prices = [{"name":"VIP Customer Benefits","id":26,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"VIP Customer Benefits","discountAmount":0,"discountPercentage":0},{"name":"1x Pack of Detox Tea (28 Bags)","id":1749,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"1x Pack of Detox Tea (28 Bags)","discountAmount":0,"discountPercentage":0},{"name":"2x Pack of Detox Tea (56 Bags)","id":1746,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"2x Pack of Detox Tea (56 Bags)","discountAmount":0,"discountPercentage":0},{"name":"3x Pack of Detox Tea (84 Bags)","id":1747,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"3x Pack of Detox Tea (84 Bags)","discountAmount":0,"discountPercentage":0},{"name":"Akemi Detox Tea  Journey Package Protection","id":1703,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Akemi Detox Tea  Journey Package Protection","discountAmount":0,"discountPercentage":0},{"name":"Akemi Detox Tea - 3 Year Warranty","id":1702,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Akemi Detox Tea - 3 Year Warranty","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Akemi Detox Tea","id":1704,"quantity":1,"price":0,"shippable":false,"fullPrice":0,"finalPrice":0,"productName":"Special 1x EXTRA Akemi Detox Tea","discountAmount":0,"discountPercentage":0},{"name":"Special 1x EXTRA Akemi Detox Tea","id":1719,"quantity":1,"price":0,"shippable":false,"fullPrice":24.23,"finalPrice":24.23,"productName":"Special 1x EXTRA Akemi Detox Tea","discountAmount":0,"discountPercentage":0}];
 const shippables = [{"id":1698,"name":"Akemi Detox Tea"}];
 
 function removeObjectUndefinedProperties(obj) {
@@ -925,7 +925,7 @@ const processKlarnaUpsell = async () => {
         body: JSON.stringify({
           offers: offers.map((o) => JSON.stringify(o)),
           order_id: lastOrderId,
-          pageId: "_ut-iTZpQ6_UXgsLc3WSRGYTXSZXLT_uEnF25Un3iFaln0svpZ3PqktJCCJd_Gvj"
+          pageId: "7dcO1VsINxwldU77R9X2S4-aGZRQQ-E2eOKm6DA3U1r-zGtqpC4xWa2IepDw_WJw"
         })
       }
     );
@@ -1005,7 +1005,7 @@ const processUpsell = async () => {
   }
   try {
     const orderData = JSON.parse(sessionStorage.getItem("orderData"));
-    orderData.pageId = "_ut-iTZpQ6_UXgsLc3WSRGYTXSZXLT_uEnF25Un3iFaln0svpZ3PqktJCCJd_Gvj";
+    orderData.pageId = "7dcO1VsINxwldU77R9X2S4-aGZRQQ-E2eOKm6DA3U1r-zGtqpC4xWa2IepDw_WJw";
     const lastOrderId = sessionStorage.getItem("cms_oid");
     const stripePayment = JSON.parse(sessionStorage.getItem("stripePayment"));
     const isStripeTestOrder = stripePayment && !stripePayment.isLive;
