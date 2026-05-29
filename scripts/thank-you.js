@@ -92,7 +92,8 @@ const i18n = {
     "id": 225,
     "name": "United Kingdom",
     "iso_2": "GB",
-    "iso_3": "GBR"
+    "iso_3": "GBR",
+    "displayName": "United Kingdom"
   },
   "pricingText": {
     "off": "OFF",
@@ -303,7 +304,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const endpoint =
     `orders?order_id=${orderids.join(",")}` +
-    `&with=order_offers,customer_address_billing,customer_address_shipping,customer,transactions,cart&pageId=flnKXiXFa76A2rZi6ly-qT2APJ7FrR-HecuImhQD0_wXqW57ndCUcSq8E4SJBdJO`
+    `&with=order_offers,customer_address_billing,customer_address_shipping,customer,transactions,cart&pageId=zhj4U1CbKhnvpt7RXlivzJwsJQ2WatwLAskbzZw28crQwkV88HCSJO5t7bM_jAS2`
 
   const response = await fetch(
     `https://app-cms-api-proxy-prod-001.azurewebsites.net/vrio/${endpoint}`,

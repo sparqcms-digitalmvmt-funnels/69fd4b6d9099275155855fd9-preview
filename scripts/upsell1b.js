@@ -96,7 +96,8 @@ const i18n = {
     "id": 225,
     "name": "United Kingdom",
     "iso_2": "GB",
-    "iso_3": "GBR"
+    "iso_3": "GBR",
+    "displayName": "United Kingdom"
   },
   "pricingText": {
     "off": "OFF",
@@ -925,7 +926,7 @@ const processKlarnaUpsell = async () => {
         body: JSON.stringify({
           offers: offers.map((o) => JSON.stringify(o)),
           order_id: lastOrderId,
-          pageId: "PWbXiVV5_4qRawCnl9uwtlifs28fxDc9kLGI6PmPqtjAO4Vrn6aNG6JnPx4yHRET"
+          pageId: "6kC6EtKXH46Ks6W5_c6qZ25K8HCxtnXSKsei2qkk2hS0kG3fLs02X27gNEf2tuYx"
         })
       }
     );
@@ -1005,7 +1006,7 @@ const processUpsell = async () => {
   }
   try {
     const orderData = JSON.parse(sessionStorage.getItem("orderData"));
-    orderData.pageId = "PWbXiVV5_4qRawCnl9uwtlifs28fxDc9kLGI6PmPqtjAO4Vrn6aNG6JnPx4yHRET";
+    orderData.pageId = "6kC6EtKXH46Ks6W5_c6qZ25K8HCxtnXSKsei2qkk2hS0kG3fLs02X27gNEf2tuYx";
     const lastOrderId = sessionStorage.getItem("cms_oid");
     const stripePayment = JSON.parse(sessionStorage.getItem("stripePayment"));
     const isStripeTestOrder = stripePayment && !stripePayment.isLive;

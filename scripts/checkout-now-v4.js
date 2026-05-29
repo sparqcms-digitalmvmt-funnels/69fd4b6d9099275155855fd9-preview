@@ -186,7 +186,8 @@ const i18n = {
     "id": 225,
     "name": "United Kingdom",
     "iso_2": "GB",
-    "iso_3": "GBR"
+    "iso_3": "GBR",
+    "displayName": "United Kingdom"
   },
   "pricingText": {
     "off": "OFF",
@@ -352,7 +353,15 @@ const getCountries = () => {
   const rawCampaignCountries = Array.isArray(campaignInfo.countries) && campaignInfo.countries.length > 0
     ? campaignInfo.countries
     : null;
-  if (!rawCampaignCountries) return SUPPORTED_ADDRESS_COUNTRIES;
+
+  const applyDisplayName = (country) => {
+    if (country.iso_2 === i18n.fallbackCountry.iso_2 && i18n.fallbackCountry.displayName) {
+      return { ...country, name: i18n.fallbackCountry.displayName };
+    }
+    return country;
+  };
+
+  if (!rawCampaignCountries) return SUPPORTED_ADDRESS_COUNTRIES.map(applyDisplayName);
   const campaignFiltered = rawCampaignCountries
     .map((c) => ({
       ...c,
@@ -361,11 +370,10 @@ const getCountries = () => {
     }))
     .filter((c) => c.iso_2 && SUPPORTED_ADDRESS_COUNTRIES.some((s) => s.iso_2 === c.iso_2))
     .map((c) => {
-      // Prefer the canonical name from SUPPORTED_ADDRESS_COUNTRIES if campaign entry lacks one
       const canonical = SUPPORTED_ADDRESS_COUNTRIES.find((s) => s.iso_2 === c.iso_2);
-      return { ...c, name: c.name || canonical?.name || c.iso_2 };
+      return applyDisplayName({ ...c, name: c.name || canonical?.name || c.iso_2 });
     });
-  return campaignFiltered.length ? campaignFiltered : SUPPORTED_ADDRESS_COUNTRIES;
+  return campaignFiltered.length ? campaignFiltered : SUPPORTED_ADDRESS_COUNTRIES.map(applyDisplayName);
 };
 
 const countries = getCountries();
@@ -614,7 +622,7 @@ async function createOrderViaWallet(confirmationToken, paymentMethodId) {
         ?.getAttribute("data-shipping-profile-id") || undefined;
 
   const orderData = {
-    pageId: "599tX0W5m7yrww6NOBmySCtgz2MmpwakDA7v7MrBBQx-0LYxXxr5rjfCYsrWKru6",
+    pageId: "63zU13NnVD9glVmJFqa3MHE0wB61lSM2t_v2QhHcjx8US4ZKZNgqw5gPpQ4mqoWr",
     action: "process",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1,
@@ -1412,7 +1420,7 @@ async function createOrderViaPaypal(isExpress = false) {
   const shippingProfileId = +document.querySelector(`[data-product-id="${selectedProduct.id}"]`)?.getAttribute('data-shipping-profile-id') || undefined;
   const sameAddress = isSameAddress();
   const orderData = {
-    pageId: "599tX0W5m7yrww6NOBmySCtgz2MmpwakDA7v7MrBBQx-0LYxXxr5rjfCYsrWKru6",
+    pageId: "63zU13NnVD9glVmJFqa3MHE0wB61lSM2t_v2QhHcjx8US4ZKZNgqw5gPpQ4mqoWr",
     action: "process",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1, // VRIO URL ending /connection
@@ -1712,7 +1720,7 @@ async function createOrderViaKlarna() {
   const sameAddress = isSameAddress();
 
   const orderData = {
-    pageId: "599tX0W5m7yrww6NOBmySCtgz2MmpwakDA7v7MrBBQx-0LYxXxr5rjfCYsrWKru6",
+    pageId: "63zU13NnVD9glVmJFqa3MHE0wB61lSM2t_v2QhHcjx8US4ZKZNgqw5gPpQ4mqoWr",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1,
     email: email,
@@ -2091,7 +2099,7 @@ async function createOrderViaCreditCard() {
   let orderTotal = Math.max(0, Number(selectedProduct.price) * selectedProduct.quantity);
 
   const orderData = {
-    pageId: "599tX0W5m7yrww6NOBmySCtgz2MmpwakDA7v7MrBBQx-0LYxXxr5rjfCYsrWKru6",
+    pageId: "63zU13NnVD9glVmJFqa3MHE0wB61lSM2t_v2QhHcjx8US4ZKZNgqw5gPpQ4mqoWr",
     action: "process",
     campaign_id: CAMPAIGN_ID,
     connection_id: 1, // VRIO URL ending /connection
@@ -2945,7 +2953,7 @@ if (typeof validateAndSendToKlaviyo === "function") {
       var regionNames = null;
       try { regionNames = new Intl.DisplayNames([PHONE_LOCALE_MAP[i18n.iso2] || LOCALE], { type: 'region' }); } catch {}
       var phoneI18n = Object.fromEntries(
-        getCountries().map((c) => [
+        countries.map((c) => [
           c.iso_2.toLowerCase(),
           (regionNames ? regionNames.of(c.iso_2) : null) || c.name || c.iso_2,
         ])
@@ -2957,7 +2965,7 @@ if (typeof validateAndSendToKlaviyo === "function") {
         initialCountry: i18n.phoneInitialCountry,
         strictMode: false,
         onlyCountries: (
-          getCountries()
+          countries
         ).map((c) => c.iso_2.toLowerCase()),
         i18n: phoneI18n,
       });
@@ -4366,7 +4374,7 @@ async function returnPaypal() {
 ;
 
     const body = {
-        pageId: "599tX0W5m7yrww6NOBmySCtgz2MmpwakDA7v7MrBBQx-0LYxXxr5rjfCYsrWKru6",
+        pageId: "63zU13NnVD9glVmJFqa3MHE0wB61lSM2t_v2QhHcjx8US4ZKZNgqw5gPpQ4mqoWr",
         action: "process",
         campaign_id: CAMPAIGN_ID,
         connection_id: 1,
